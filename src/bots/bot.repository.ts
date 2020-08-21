@@ -2,7 +2,7 @@ import { EntityRepository, Repository } from "typeorm";
 import { Bot } from "./bot.entity";
 import { CreateBotDto } from "./dto/create-bot.dto";
 import { v4 as uuid } from "uuid";
-import { BadRequestException, InternalServerErrorException } from '@nestjs/common';
+import { BadRequestException, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { GetBotsFilterDto } from './dto/get-bots-filter.dto';
 
 @EntityRepository(Bot)
@@ -42,5 +42,15 @@ export class BotRepository extends Repository<Bot> {
         } catch (error) {
             throw new InternalServerErrorException();
         }
+    }
+
+    async findBotById(id: string): Promise<Bot> {
+        const bot = await this.findOne({ guid: id });
+
+        if (! bot) {
+            throw new NotFoundException(`Bot with ${id} not found`);
+        }
+
+        return bot;
     }
 }

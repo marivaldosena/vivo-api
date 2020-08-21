@@ -5,12 +5,15 @@ import {
     Post,
     UsePipes,
     Query,
-    ValidationPipe, Param,
+    ValidationPipe,
+    Param,
+    Put,
 } from '@nestjs/common';
 import { BotsService } from './bots.service';
 import { CreateBotDto } from './dto/create-bot.dto';
 import { BotResultDto } from './dto/bot-result.dto';
 import { GetBotsFilterDto } from './dto/get-bots-filter.dto';
+import { UpdateBotDto } from './dto/update-bot.dto';
 
 @Controller('bots')
 export class BotsController {
@@ -36,5 +39,14 @@ export class BotsController {
     @UsePipes(ValidationPipe)
     async createBot(@Body() createBotDto: CreateBotDto): Promise<BotResultDto> {
         return await this.botsService.createBot(createBotDto);
+    }
+
+    @Put('/:id')
+    @UsePipes(ValidationPipe)
+    async updateBot(
+      @Param('id') id: string,
+      @Body() updateBotDto: UpdateBotDto,
+    ): Promise<BotResultDto> {
+        return await this.botsService.updateBot(id, updateBotDto);
     }
 }
