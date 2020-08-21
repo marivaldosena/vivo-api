@@ -7,7 +7,8 @@ import {
     Query,
     ValidationPipe,
     Param,
-    Put, Delete,
+    Put,
+    Delete,
 } from '@nestjs/common';
 import { BotsService } from './bots.service';
 import { CreateBotDto } from './dto/create-bot.dto';
