@@ -1,0 +1,21 @@
+version: '3.5'
+
+services:
+  testdb:
+    image: postgres
+    ports:
+      - '5433:5432'
+    environment:
+      - POSTGRES_PASSWORD=testsenha
+      - POSTGRES_USER=testadmin
+      - POSTGRES_DB=vivoapitesting
+
+  adminer:
+    image: adminer
+    ports:
+      - '8088:8080'
+    links:
+      - testdb
+
+volumes:
+  testdb:

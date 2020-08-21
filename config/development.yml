@@ -1,0 +1,7 @@
+db:
+  host: 'localhost'
+  username: 'testadmin'
+  password: 'testsenha'
+  port: 5433
+  database: 'vivoapitesting'
+  synchronize: true
