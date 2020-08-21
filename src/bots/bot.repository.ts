@@ -53,4 +53,12 @@ export class BotRepository extends Repository<Bot> {
 
         return bot;
     }
+
+    async deleteBotById(id: string) {
+        const deletedBots = await this.delete({ guid: id });
+
+        if (deletedBots.affected < 1) {
+            throw new NotFoundException(`Bot with ${id} not found`);
+        }
+    }
 }

@@ -69,4 +69,8 @@ export class BotsService {
 
         return botResult;
     }
+
+    async deleteBotById(id: string) {
+        await this.botRepository.deleteBotById(id);
+    }
 }

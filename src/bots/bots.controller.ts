@@ -7,7 +7,7 @@ import {
     Query,
     ValidationPipe,
     Param,
-    Put,
+    Put, Delete,
 } from '@nestjs/common';
 import { BotsService } from './bots.service';
 import { CreateBotDto } from './dto/create-bot.dto';
@@ -48,5 +48,10 @@ export class BotsController {
       @Body() updateBotDto: UpdateBotDto,
     ): Promise<BotResultDto> {
         return await this.botsService.updateBot(id, updateBotDto);
+    }
+
+    @Delete('/:id')
+    async deleteBot(@Param('id') id: string ): Promise<void> {
+        return await this.botsService.deleteBotById(id);
     }
 }
